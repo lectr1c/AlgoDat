@@ -6,7 +6,7 @@ import java.util.Stack;
 public class PostFixEvaluator {
 
     public static class SyntaxErrorException extends Exception {
-        SyntaxErrorException(String message) {
+        public SyntaxErrorException(String message) {
             super(message);
         }
     }

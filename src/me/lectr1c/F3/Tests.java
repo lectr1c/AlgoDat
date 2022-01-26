@@ -1,5 +1,7 @@
 package me.lectr1c.F3;
 
+import me.lectr1c.F4.InfixToPostFix;
+
 public class Tests {
 
     public static void main(String[] args) {
@@ -31,6 +33,9 @@ public class Tests {
         } catch (PostFixEvaluator.SyntaxErrorException e){
             System.out.println(e.getMessage());
         }
+
+
+
 
 
     }
