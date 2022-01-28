@@ -88,10 +88,6 @@ public class SingleLinkedListQ3<E> {
         size++;
     }
 
-    public String debugString(){
-        return this.toString() + " head: " + head.data;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
