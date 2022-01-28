@@ -45,6 +45,8 @@ public class ArrayQueueNB8<E> extends AbstractQueue<E>{ // implements Queue<E> g
 
             if(size <= maxSize / 4) reallocate(maxSize / 2);
 
+
+
             return element;
         }
     }

@@ -40,10 +40,15 @@ public class ArrayQueueNB8_1<E>{
 		}	
 	}
 
+
+
 	private void reallocate() {
 		maxSize*=2;
 		data= Arrays.copyOf(data,maxSize);
 	}
+
+//	{ 3, 4, null, null, 1, 2 }
+//	{ 3, 4, null, null, 1, 2, null, null, null, null, null }
 
 	@Override
 	public String toString() {
