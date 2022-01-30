@@ -13,7 +13,6 @@ public class Tests {
         }
 
 
-
         ArrayQueueNB8_1<Integer> queue = new ArrayQueueNB8_1<>(5);
         queue.offer(1);
         System.out.println(queue.toString());
