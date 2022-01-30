@@ -65,6 +65,7 @@ public class SingleLinkedListQ2<E> {
         if (index == 0) {
             currNode = head;
             head = head.next;
+            //TODO: Remove tail reference
         }
         else {
             prevNode = getNode(index - 1);
