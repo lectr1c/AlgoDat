@@ -6,9 +6,9 @@ import java.io.IOException;
 
 public class Labyrinth {
 
-    int rows,columns;
-    public enum Cell{WALL,OPEN,CORRECT,VISITED};
-    private Position currentP,goal;
+    int rows, columns;
+    public enum Cell{WALL, OPEN, CORRECT, VISITED};
+    private Position currentP, goal, start;
     Cell[][] mazeMatrix;
 
 
@@ -37,6 +37,7 @@ public class Labyrinth {
                         goal = new Position(i, j);
                     } else if (s.charAt(j - 1) == 's') {
                         currentP = new Position(i, j);
+                        start = currentP;
                     }
                 }
             }
@@ -62,16 +63,54 @@ public class Labyrinth {
     public boolean solve(){
         return solve(currentP);
     }
-    private boolean solve(Position p){
-        //algoritm för att hitta målet från ruta p
 
-        return true;
+    private boolean solve(Position p){
+        if (p.equals(goal)) {
+            setCellState(p, Cell.CORRECT);
+            return true;
+        }
+
+        var state = getCellState(p);
+        if (state == Cell.WALL || state == Cell.VISITED) {
+            return false;
+        }
+        setCellState(p, Cell.VISITED);
+
+        boolean pathFound = solve(new Position(p.row - 1, p.column)) ||
+                solve(new Position(p.row, p.column - 1)) ||
+                solve(new Position(p.row + 1, p.column)) ||
+                solve(new Position(p.row, p.column + 1));
+
+        if (pathFound) {
+            setCellState(p, Cell.CORRECT);
+        }
+        return pathFound;
+    }
+
+    private Cell getCellState(Position p) {
+        return mazeMatrix[p.row][p.column];
+    }
+
+    private Cell setCellState(Position p, Cell cell) {
+        return mazeMatrix[p.row][p.column] = cell;
     }
 
     public void print(){
-        for(int i=1;i<rows-1;i++){
-            for(int j=1;j<columns-1;j++)
-                System.out.print(mazeMatrix[i][j].ordinal());
+        for (int i = 1; i < rows - 1; i++) {
+            for (int j = 1; j < columns - 1; j++) {
+                if (new Position(i, j).equals(start)) {
+                    System.out.print("S");
+                } else if (new Position(i, j).equals(goal)) {
+                    System.out.print("G");
+                } else {
+                    switch (mazeMatrix[i][j]) {
+                        case CORRECT -> System.out.print("X");
+                        case WALL -> System.out.print(".");
+                        case VISITED, OPEN -> System.out.print("-");
+                        default -> System.out.print(mazeMatrix[i][j].ordinal());
+                    }
+                }
+            }
             System.out.println();
         }
     }

@@ -62,12 +62,12 @@ public class RecLinkedList<E> {
 
     private Node<E> getNode(int index) {
         Node<E> node = head;
-        return getNode(head, 0, index);
+        return getNode(head, index);
     }
 
-    private Node<E> getNode(Node<E> node, int currIndex, int endIndex){
-        if (currIndex == endIndex) return node;
-        return getNode(node.next, currIndex + 1, endIndex);
+    private Node<E> getNode(Node<E> node, int index){
+        if (0 == index) return node;
+        return getNode(node.next, index - 1);
     }
 
     public E remove(int index) {
