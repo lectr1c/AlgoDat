@@ -124,7 +124,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return node.right == null ? node.data : maxRec(node.right);
     }
 
-    public E maxItr(){
+    public E maxItr() {
         var current = root;
         while (current != null && current.right != null){
             current = current.right;
@@ -132,7 +132,8 @@ public class BinarySearchTree<E extends Comparable<E>> {
         return current == null ? null : current.data;
     }
 
-    public int numberOfLeaves(){
+    public int numberOfLeaves() {
+        if (root == null) return 0;
         return numberOfLeaves(root);
     }
 

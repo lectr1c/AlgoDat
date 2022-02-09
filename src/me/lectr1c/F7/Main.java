@@ -12,9 +12,10 @@ public class Main {
         bst.add("F");
         bst.add("D");
 
-        System.out.println(bst.printTrees() + "  leaves: " + bst.numberOfLeaves() + " nodes: " + bst.numberOfNodes());
-        System.out.println(bst.findItr("B"));
-        System.out.println(bst.maxRec());
-        System.out.println(bst.maxItr());
+        System.out.println(bst.printTrees());
+        System.out.println("leaves: " + bst.numberOfLeaves() + " nodes: " + bst.numberOfNodes());
+        System.out.println("Find B: " + bst.findItr("B"));
+        System.out.println("Max Recursive: " + bst.maxRec());
+        System.out.println("Max Iterative: " + bst.maxItr());
     }
 }
