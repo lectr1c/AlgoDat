@@ -8,11 +8,11 @@ public class Airport {
 
     public static void main(String[] args) {
         Airport ap = new Airport();
-        ap.runSim();
-        System.out.println("inc avg wait time: " + ap.getAverageIncWaitTime());
-        System.out.println("out avg wait time: " + ap.getAverageOutWaitTime());
-        System.out.println("inc max wait time: " + ap.getMaxIncWaitTime());
-        System.out.println("out max wait time: " + ap.getMaxOutWaitTime());
+        ap.runSim(10);
+        System.out.println("incoming avg wait time: " + ap.getAverageIncWaitTime());
+        System.out.println("outgoing avg wait time: " + ap.getAverageOutWaitTime());
+        System.out.println("incoming max wait time: " + ap.getMaxIncWaitTime());
+        System.out.println("outgoing max wait time: " + ap.getMaxOutWaitTime());
     }
 
     private static class Airplane {
@@ -84,6 +84,7 @@ public class Airport {
             outgoing.offer(new Airplane(timestamp));
             totalOutPlanes++;
         }
+
 
         if (activeTimeLeft > 0) activeTimeLeft -= tickrate;
 

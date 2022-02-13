@@ -7,7 +7,10 @@ import java.util.Queue;
 public class LetterSorterBFS {
     public static void main(String[] args) {
         var pkgSorter = new LetterSorterBFS();
-        System.out.println(pkgSorter.sort("adecb"));
+        String result1 = pkgSorter.sort("adcbe");
+        String result2 = pkgSorter.sort("edcba");
+        System.out.println("adcbe " + result1 + " " + result1.length() + " moves");
+        System.out.println("edcba " + result2 + " " + result2.length() + " moves");
     }
 
     public LetterSorterBFS(){ }
@@ -23,8 +26,7 @@ public class LetterSorterBFS {
         Queue<State> callQueue = new LinkedList<>();
         State current = new State(packages, "");
 
-
-        while(!isSorted(current.packages)) {
+        while(current != null && !isSorted(current.packages)) {
             swapLastTwo(current.packages);
             callQueue.offer(new State(current.packages.clone(), current.steps + "b"));
             swapLastTwo(current.packages);

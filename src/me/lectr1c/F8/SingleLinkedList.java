@@ -1,9 +1,9 @@
-package me.lectr1c.LABA.LAB1;
+package me.lectr1c.F8;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class SingleLinkedListQ3<E> implements Iterable<E>{
+public class SingleLinkedList<E> implements Iterable<E>{
 
     private static class Node<E> {
         private E data;
@@ -16,80 +16,13 @@ public class SingleLinkedListQ3<E> implements Iterable<E>{
     }
 
     private Node<E> head;
-    private int size;
 
-    public SingleLinkedListQ3(){
+    public SingleLinkedList(){
         head = null;
-        size = 0;
-    }
-
-    public void add(int index, E item) {
-        if (index < 0) {
-            throw new IndexOutOfBoundsException(Integer.toString(index));
-        }
-        if (index == 0) {
-            addFirst(item);
-        } else {
-            Node<E> node = getNode(index - 1);
-            addAfter(node, item);
-        }
     }
 
     public void addFirst(E item) {
         head = new Node<E>(item, head);
-        size++;
-    }
-
-    public boolean add(E item) {
-        add(size, item);
-        return true;
-    }
-
-    public E get(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException(Integer.toString(index));
-        }
-        Node<E> node = getNode(index);
-        return node.data;
-    }
-
-    private Node<E> getNode(int index) {
-        Node<E> node = head;
-        for (int i = 0; i < index && node != null; i++) {
-            node = node.next;
-        }
-        return node;
-    }
-
-    public E remove(int index) {
-        if (index < 0 || index >= size) throw new IndexOutOfBoundsException(Integer.toString(index));
-        Node<E> prevNode = null;
-        Node<E> currNode = null;
-        Node<E> nextNode = null;
-
-        if (index == 0) {
-            currNode = head;
-            head = head.next;
-        }
-        else {
-            prevNode = getNode(index - 1);
-            currNode = prevNode.next;
-            if (index != size - 1) nextNode = prevNode.next.next;
-
-            prevNode.next = nextNode;
-        }
-        size--;
-
-        return currNode.data;
-    }
-
-    public int getSize(){
-        return size;
-    }
-
-    private void addAfter(Node<E> node, E item) {
-        node.next = new Node<E>(item, node.next);
-        size++;
     }
 
     @Override
@@ -149,7 +82,6 @@ public class SingleLinkedListQ3<E> implements Iterable<E>{
             else head = current;
 
             firstPrev = secondPrev;
-            size--;
         }
     }
 }

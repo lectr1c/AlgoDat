@@ -5,10 +5,12 @@ import java.util.InputMismatchException;
 public class LetterSorterArray {
     public static void main(String[] args) {
         var pkgSorter = new LetterSorterArray();
-        var bfsSorter = new LetterSorterBFS();
-        System.out.println("DFS: " + pkgSorter.sort("adecb"));
-        System.out.println("BFS: " + bfsSorter.sort("adecb"));
-        System.out.println("Hi?");
+        String input1 = "adcbe";
+        String input2 = "edcba";
+        String result1 = pkgSorter.sort(input1);
+        String result2 = pkgSorter.sort(input2);
+        System.out.println(input1 + " " + result1 + " " + result1.length() + " moves");
+        System.out.println(input2 + " " + result2 + " " + result2.length() + " moves");
     }
 
     public LetterSorterArray(){ }
@@ -25,7 +27,7 @@ public class LetterSorterArray {
 
     private String sort(char[] packages, int limit) {
         if (isSorted(packages)) return "";
-        if (limit > 15) return "XXXXXXXXXEXCEEDEDDEPTHXXXXXXXX";
+        if (limit > 15) return "XXXXXXXXX EXCEEDED DEPTH XXXXXXXX";
 
         swapLastTwo(packages);
         String swap = "b" + sort(packages, limit + 1);

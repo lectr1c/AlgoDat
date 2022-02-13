@@ -1,6 +1,7 @@
 package me.lectr1c.LABA.LAB2;
 
 import java.util.Deque;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 
 public class LetterSorterDequeue {
@@ -13,6 +14,11 @@ public class LetterSorterDequeue {
     public LetterSorterDequeue(){ }
 
     public String sort(String startStr){
+        if (!startStr.contains("a") || !startStr.contains("b") ||
+                !startStr.contains("c") || !startStr.contains("d") || !startStr.contains("e"))
+            throw new InputMismatchException("Incorrect Letters");
+        if (startStr.length() != 5) throw new InputMismatchException("Length doesn't match");
+
         Deque<Character> packages = new LinkedList<>();
         for (char c: startStr.toCharArray())
             packages.offer(c);
