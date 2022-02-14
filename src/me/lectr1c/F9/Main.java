@@ -1,8 +1,6 @@
 package me.lectr1c.F9;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -29,12 +27,29 @@ public class Main {
             }
             System.out.println(cars);
             Collections.sort(cars);
+            saveToFile("carsA", cars);
             System.out.println(cars);
             cars.sort(new CompareCar());
+            saveToFile("carsB", cars);
             System.out.println(cars);
         } catch (IOException e) {
                 System.out.println(e.getMessage());
         }
 
+    }
+
+    public static void saveToFile(String filename, ArrayList<Car> cars){
+        try {
+            String directory = System.getProperty("user.dir");
+            BufferedWriter out = new BufferedWriter(new FileWriter(directory + "\\" + filename + ".txt"));
+            for (Car car: cars) {
+                String carStr = car.getModel() + " " + car.getYear() + " " + car.getMileage();
+                out.write(carStr);
+                out.newLine();
+            }
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
