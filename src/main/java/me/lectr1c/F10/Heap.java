@@ -25,7 +25,11 @@ public class Heap<E extends Comparable<E>> {
         E element = data[size];
         swap(data, 0, size);
         data[size] = null;
-        heapifyDown(0)
+        heapifyDown(0);
+        return element;
+    }
+
+    private void heapifyDown(int i) {
     }
 
     private void heapifyUp(int childIndex) {
