@@ -15,21 +15,38 @@ public class Heap<E extends Comparable<E>> {
         if (size == data.length) resize();
 
         data[size] = element;
-        size++;
         heapifyUp(size);
+        size++;
         return true;
     }
 
     public E extract(){
         size--;
-        E element = data[size];
+        E element = data[0];
         swap(data, 0, size);
         data[size] = null;
         heapifyDown(0);
         return element;
     }
 
-    private void heapifyDown(int i) {
+    private void heapifyDown(int parentIndex) {
+        int leftChild = 2 * parentIndex + 1;
+        int rightChild = 2 * parentIndex + 2;
+        int smallestIndex = Integer.MAX_VALUE;
+
+        if (data[leftChild] == null && data[rightChild] == null) return;
+
+        if (data[leftChild] != null){
+           smallestIndex = leftChild;
+           if(data[rightChild] != null && data[rightChild].compareTo(data[leftChild]) < 0){
+               smallestIndex = rightChild;
+           }
+        }
+
+        if (data[parentIndex].compareTo(data[smallestIndex]) > 0){
+            swap(data, parentIndex, smallestIndex);
+            heapifyDown(smallestIndex);
+        }
     }
 
     private void heapifyUp(int childIndex) {
@@ -44,12 +61,59 @@ public class Heap<E extends Comparable<E>> {
     private void swap(E[] data, int childIndex, int parentIndex) {
         E temp = data[childIndex];
         data[childIndex] = data[parentIndex];
-        data[parentIndex] = data[childIndex];
+        data[parentIndex] = temp;
     }
 
     private void resize() {
         int newSize = data.length*2;
         data = Arrays.copyOf(data, newSize);
+    }
+
+    @Override
+    public String toString(){
+        int maxDepth = (int) (Math.log(size) / Math.log(2));  // log base 2 of n
+
+        StringBuilder hs = new StringBuilder();  // heap string builder
+        for (int d = maxDepth; d >= 0; d--) {  // number of layers, we build this backwards
+            int layerLength = (int) Math.pow(2, d);  // numbers per layer
+
+            StringBuilder line = new StringBuilder();  // line string builder
+            for (int i = layerLength; i < (int) Math.pow(2, d + 1); i++) {
+                // before spaces only on not-last layer
+                if (d != maxDepth) {
+                    line.append(" ".repeat((int) Math.pow(2, maxDepth - d)));
+                }
+                // extra spaces for long lines
+                int loops = maxDepth - d;
+                if (loops >= 2) {
+                    loops -= 2;
+                    while (loops >= 0) {
+                        line.append(" ".repeat((int) Math.pow(2, loops)));
+                        loops--;
+                    }
+                }
+
+                // add in the number
+                if (i <= size) {
+                    line.append(String.format("%-2s", data[i - 1]));  // add leading zeros
+                } else {
+                    line.append("--");
+                }
+
+                line.append(" ".repeat((int) Math.pow(2, maxDepth - d)));  // after spaces
+                // extra spaces for long lines
+                loops = maxDepth - d;
+                if (loops >= 2) {
+                    loops -= 2;
+                    while (loops >= 0) {
+                        line.append(" ".repeat((int) Math.pow(2, loops)));
+                        loops--;
+                    }
+                }
+            }
+            hs.insert(0, line.toString() + "\n");  // prepend line
+        }
+        return hs.toString();
     }
 
 
