@@ -5,14 +5,17 @@ import java.util.Queue;
 
 public class BinarySearchTree<E extends Comparable<E>> {
 
+    public static void buildTree(BinarySearchTree<Integer> b, int[] v){
+        for(int data:v)
+            b.add(data);
+    }
     public static void main(String[] args) {
-        var bst = new BinarySearchTree<Integer>();
-        bst.add(5);
-        bst.add(8);
-        bst.add(1);
-        bst.add(2);
-        bst.add(12);
-        System.out.println(bst.getNextLarger(12));
+
+        BinarySearchTree<Integer> bst= new BinarySearchTree<>();
+        buildTree(bst,new int[] {30,20,40,15,25,35,45,10,17,22,27,32,37,42,47,16,23,28,39,49,29,51});
+        System.out.println(bst);
+        for(int i=0;i<52;i++)
+            System.out.print("" + i +  ":" + bst.getNextLarger(i) + " ");
     }
 
     private static class Node<E>{
